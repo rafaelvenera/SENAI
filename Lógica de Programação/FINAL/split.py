@@ -1,4 +1,3 @@
-import os
 import csv
 
 def quebra(arquivo, delimitador=',', limite=5000):
