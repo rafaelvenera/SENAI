@@ -14,10 +14,14 @@ cur.execute('DROP TABLE IF EXISTS enem')
 cur.execute(""" CREATE TABLE enem(NU_INSCRICAO TEXT, TP_STATUS_REDACAO INTEGER, NU_NOTA_REDACAO REAL, NU_NOTA_CN REAL, NU_NOTA_CH REAL, NU_NOTA_LC REAL, NU_NOTA_MT REAL,MEDIA_PONDERADA REAL, NU_IDADE INTEGER); """)
 cx.commit()
 
-with open('train.csv', newline='', encoding='utf-8') as arquivo:
+with open('enem2016.csv', newline='', encoding='utf-8') as arquivo:
+
+    #delimitador = csv.Sniffer().sniff(arquivo.read(), delimiters=';,')
+    #arquivo.seek(0)
+
     next(arquivo) #Pula primeira linha
-    
-    for linha in csv.reader(arquivo):
+
+    for linha in csv.reader(arquivo, delimitador):
         nr_inscricao = linha[1]
         status_redacao = linha[110]
         idade = linha[7]
@@ -44,7 +48,7 @@ with open('train.csv', newline='', encoding='utf-8') as arquivo:
             matematica = linha[100]
         
         media = ((float(redacao) * 3) + (float(natureza) * 2) + (float(humana) * 1) + (float(codigo) * 1.5) + (float(matematica) * 3)) / (3 + 2 + 1 + 1.5 + 3)
-        cur.execute("""INSERT INTO enem VALUES (?,?,?,?,?,?,?,?,?);""", (nr_inscricao, status_redacao, redacao, natureza, humana, codigo, matematica, media ,idade))          
+        cur.execute("""INSERT INTO enem VALUES (?,?,?,?,?,?,?,?,?);""", (nr_inscricao, status_redacao, redacao, natureza, humana, codigo, matematica, media ,idade))
 
 cx.commit()
 
