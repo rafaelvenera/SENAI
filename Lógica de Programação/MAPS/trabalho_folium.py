@@ -12,15 +12,12 @@ mapa = folium.Map(
     zoom_start=4)
 
 crime1 = MarkerCluster().add_to(mapa)
-
 cidades = pd.read_csv('importar1.csv', encoding = 'latin-1', delimiter= ';')
-
 crimes = cidades[cidades['CIDADE'] != '']
                  
 for _, cidades in crimes.iterrows():
 
     latlng = pegaLatLog(cidades['CIDADE'])
-
    
     if cidades['MV HOMICIDIO DOLOSO'] > 0:
         folium.Marker([latlng[0], latlng[1]],
@@ -65,6 +62,6 @@ for _, cidades in crimes.iterrows():
                    ).add_to(crime1)
 
 
-mapa.save('c:/users/rafaelv/desktop/map.html')
+mapa.save('map.html')
     
           
