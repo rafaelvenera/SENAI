@@ -12,56 +12,59 @@ mapa = folium.Map(
     zoom_start=4)
 
 crime1 = MarkerCluster().add_to(mapa)
-cidades = pd.read_csv('importar1.csv', encoding = 'latin-1', delimiter= ';')
-crimes = cidades[cidades['CIDADE'] != '']
-                 
-for _, cidades in crimes.iterrows():
 
-    latlng = pegaLatLog(cidades['CIDADE'])
+csv = pd.read_csv('importar1.csv', encoding = 'latin-1', delimiter= ';')
+
+crimes = csv[csv['CIDADE'] != '']
+                 
+for _, csv in crimes.iterrows():
+
+    latlng = pegaLatLog(csv['CIDADE'])
+
    
-    if cidades['MV HOMICIDIO DOLOSO'] > 0:
+    if csv['MV HOMICIDIO DOLOSO'] > 0:
         folium.Marker([latlng[0], latlng[1]],
-                    popup=cidades['CIDADE'],
+                    popup=csv['CIDADE'],
                     icon=folium.Icon(color='red'),
                    ).add_to(crime1)
 
-    if cidades['MV LATROCINIO'] > 0:
+    if csv['MV LATROCINIO'] > 0:
         folium.Marker([latlng[0], latlng[1]],
-                    popup=cidades['CIDADE'],
+                    popup=csv['CIDADE'],
                     icon=folium.Icon(color='blue'),
                    ).add_to(crime1)
 
-    if cidades['VM LESAO CORPORAL SEGUIDA DE MORTE'] > 0:
+    if csv['VM LESAO CORPORAL SEGUIDA DE MORTE'] > 0:
         folium.Marker([latlng[0], latlng[1]],
-                    popup=cidades['CIDADE'],
+                    popup=csv['CIDADE'],
                     icon=folium.Icon(color='black'),
                    ).add_to(crime1)
 
-    if cidades['VM HOMICIDIO EM DECORRENCIA DE ACAO DA POLICIA CIVIL'] > 0:
+    if csv['VM HOMICIDIO EM DECORRENCIA DE ACAO DA POLICIA CIVIL'] > 0:
         folium.Marker([latlng[0], latlng[1]],
-                    popup=cidades['CIDADE'],
+                    popup=csv['CIDADE'],
                     icon=folium.Icon(color='pink'),
                    ).add_to(crime1)
 
-    if cidades['VM HOMICIDIO EM DECORRENCIA DE ACAO DA POLICIA MILITAR'] > 0:
+    if csv['VM HOMICIDIO EM DECORRENCIA DE ACAO DA POLICIA MILITAR'] > 0:
         folium.Marker([latlng[0], latlng[1]],
-                    popup=cidades['CIDADE'],
+                    popup=csv['CIDADE'],
                     icon=folium.Icon(color='yellow'),
                    ).add_to(crime1)
 
-    if cidades['VM POLICIAL CIVIL MORTO EM SERVIÇO'] > 0:
+    if csv['VM POLICIAL CIVIL MORTO EM SERVIÇO'] > 0:
         folium.Marker([latlng[0], latlng[1]],
-                    popup=cidades['CIDADE'],
+                    popup=csv['CIDADE'],
                     icon=folium.Icon(color='white'),
                    ).add_to(crime1)
 
-    if cidades['VM POLICIAL MILITAR MORTO EM SERVICO'] > 0:
+    if csv['VM POLICIAL MILITAR MORTO EM SERVICO'] > 0:
         folium.Marker([latlng[0], latlng[1]],
-                    popup=cidades['CIDADE'],
+                    popup=csv['CIDADE'],
                     icon=folium.Icon(color='black'),
                    ).add_to(crime1)
 
 
-mapa.save('map.html')
+mapa.save('c:/users/rafaelv/desktop/map.html')
     
           
